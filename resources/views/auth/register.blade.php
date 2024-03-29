@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('users-create') }}">
         @csrf
 
         <!-- Name -->
@@ -37,6 +37,21 @@
                             name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="admin" value="0" checked>
+                <label class="form-check-label">
+                    Usuário
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="admin" value="1">
+                <label class="form-check-label">
+                    Administrador
+                </label>
+            </div>
         </div>
 
         <div class="flex items-center justify-end mt-4">

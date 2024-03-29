@@ -3,6 +3,7 @@
 Detalhes
 @endsection
 
+@if (Auth::user()->admin)
 @section('content')
 <div class="container">
     <div class="d-flex align-items-center my-4 ">
@@ -46,4 +47,6 @@ Detalhes
 
 </div>
 @endsection
-
+@else
+Você precisa ser administrador
+@endif

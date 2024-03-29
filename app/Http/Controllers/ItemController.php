@@ -67,6 +67,9 @@ class ItemController extends Controller
             'category' => $request->category
         ]);
         return redirect()->route('items-index');
+
+
+
     }
 
     /**
