@@ -48,5 +48,5 @@ Detalhes
 </div>
 @endsection
 @else
-Você precisa ser administrador
+
 @endif

@@ -16,7 +16,7 @@ Route::prefix('items')->group(function(){
 
     Route::get('/show/{id}', [ItemController::class, 'show'])->name('items-show')->middleware('auth');
 
-    Route::get('{id}/edit', [ItemController::class, 'edit'])->name('items-edit')->middleware('auth');
+    Route::get('{id}/edit', [ItemController::class, 'edit'])->name('items-edit')->middleware('admin');
 
     Route::put('/{id}', [ItemController::class, 'update'])->name('items-update')->middleware('auth');
 
@@ -26,15 +26,14 @@ Route::prefix('items')->group(function(){
 
 Route::prefix('users')->group(function(){
 
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('users-create');
 
-    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('users-store');
+    Route::post('/', [AuthenticatedSessionController::class, 'store'])->name('users-store');
 
     Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('users-destroy');
 
-    Route::post('/', [RegisteredUserController::class, 'store'])->name('users-create');
-
 });
 
-
+Route::post('/', [RegisteredUserController::class, 'store'])->name('newUser-create');
 
 require __DIR__.'/auth.php';

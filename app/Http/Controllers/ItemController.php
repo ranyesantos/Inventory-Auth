@@ -61,14 +61,29 @@ class ItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Item::where('id', $id)->first()->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'category' => $request->category
-        ]);
-        return redirect()->route('items-index');
+        $item = Item::where('id', $id)->first();
+        $change = false;
 
+        if ($item['name'] != $request ['name']) {
+            $change = true;
 
+        } elseif ($item['description'] != $request ['description']) {
+            $change = true;
+
+        } elseif ($item['category'] != $request ['category']) {
+            $change = true;
+        } else {
+            return 'nenhum campo alterado';
+        }
+
+        if ($change == true){
+            Item::where('id', $id)->first()->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'category' => $request->category
+            ]);
+            return redirect()->route('items-index');
+        }
 
     }
 
@@ -77,7 +92,7 @@ class ItemController extends Controller
      */
     public function destroy(string $id)
     {
-        Item::where('id', $id)->first()->delete();
+        Item::where('id', $id)->delete();
         return redirect()->route('items-index');
     }
 }
