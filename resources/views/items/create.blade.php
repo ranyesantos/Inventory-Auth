@@ -14,22 +14,30 @@ Adicionar Produto
         <h2 class="m-0">Adicionar Item</h2>
     </div>
 
-    <form action="{{route('items-store')}}" method="POST">
+    <form action="{{route('items-store')}}" id="productForm" method="POST">
     @csrf
-    
+
         <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control" name="name">
+            <input type="text" required class="form-control" name="name">
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Descrição</label>
-            <textarea rows="3" type="text" class="form-control" name="description"></textarea>
+            <textarea rows="3" required type="text" class="form-control" name="description"></textarea>
         </div>
 
         <div class="mb-3">
-            <label for="category" class="form-label">Categoria</label>
-            <input type="text" class="form-control" name="category">
+            <label for="value" class="form-label">Valor</label>
+            <input type="text" id="value" class="form-control" name="value">
+        </div>
+
+        <div class="mb-3">
+            <label for="sell" class="form-label">Disponível para venda</label>
+            <select name="sell" class="form-select">
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
         </div>
 
         <div class="row d-flex align-items-center ">
@@ -43,5 +51,5 @@ Adicionar Produto
     </form>
 
 </div>
-
+<script src="{{ asset('js/format.js') }}"></script>
 @endsection

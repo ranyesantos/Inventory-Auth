@@ -26,14 +26,12 @@ Route::prefix('items')->group(function(){
 
 Route::prefix('users')->group(function(){
 
-    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('users-create');
-
     Route::post('/', [AuthenticatedSessionController::class, 'store'])->name('users-store');
 
     Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('users-destroy');
 
 });
 
-Route::post('/', [RegisteredUserController::class, 'store'])->name('newUser-create');
+Route::post('/', [RegisteredUserController::class, 'store'])->name('register-store');
 
 require __DIR__.'/auth.php';

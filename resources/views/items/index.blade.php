@@ -43,8 +43,8 @@ Página Inicial
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col" class="col-1">Item</th>
-                    <th scope="col" class="px-0 col-1 text-center">Categoria</th>
+                    <th scope="col" class="col-1">Nome</th>
+                    <th scope="col" class="px-0 col-1 text-center">Valor</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -53,7 +53,7 @@ Página Inicial
             @foreach ($items as $item)
                 <tr>
                     <td><div class="mt-1">{{$item->name}}</div></td>
-                    <td><div class="mt-1 text-center">{{$item->category}}</div></td>
+                    <td><div class="mt-1 text-center">R$ {{ number_format($item->value, 2, ',', '.') }}</div></td>
 
                     <td class="mb-1 p-0 col-1 px-2">
                         <div class="row">
@@ -96,7 +96,7 @@ Página Inicial
                     <h2 class="fs-5 mb-0 px-2">
                         Visitante
                     </h2>
-                    <a href="{{route('users-create')}}" class="text-center mb-0 px-md-2 ">
+                    <a href="{{route('login')}}" class="text-center mb-0 px-md-2 ">
                         Efetuar Login
                     </a>
                 </div>
@@ -109,7 +109,7 @@ Página Inicial
                 <div class="d-flex justify-content-end">
                     <a class="btn btn-primary d-flex align-items-center" href="{{route('items-create')}}">
                         <i class="bi bi-plus-circle fs-5"></i>
-                        <span class="d-none d-sm-inline m-1 ">Adicionar</span>
+                        <span class="d-none d-sm-inline m-1">Adicionar</span>
                     </a>
                 </div>
             </div>

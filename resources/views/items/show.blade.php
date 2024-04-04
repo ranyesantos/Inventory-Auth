@@ -4,11 +4,12 @@ Detalhes
 @endsection
 
 @section('content')
+
 <div class="container">
     <div class="d-flex align-items-center my-4 ">
-        <a class="btn me-2 p-0" href="">
+        <button class="btn me-2 p-0" id="goBackButton">
             <i class="bi bi-arrow-left-circle-fill fs-4"></i>
-        </a>
+        </button>
         <h2 class="m-0">Detalhes</h2>
     </div>
         <div class="mb-3">
@@ -22,8 +23,13 @@ Detalhes
         </div>
 
         <div class="mb-3">
-            <label for="category"  class="form-label">Categoria</label>
-            <input type="text" value="{{$item->category}}" disabled readonly class="form-control" name="category">
+            <label for="value"  class="form-label">Valor</label>
+            <input type="text" value="R$ {{ number_format($item->value, 2, ',', '.') }}" disabled readonly class="form-control" name="value">
+        </div>
+
+        <div class="mb-3">
+            <label for="sell" class="form-label">Disponível para venda</label>
+            <input type="text" value="{{$item->sell}}" disabled readonly class="form-control" name="sell">
         </div>
 
         <div class="row d-flex align-items-center">
@@ -42,7 +48,6 @@ Detalhes
             </div>
         </div>
     </div>
-
 </div>
 @endsection
 

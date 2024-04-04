@@ -13,7 +13,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::all();
+        $items = Item::orderBy('value', 'asc')->get();;
         return view('items.index', ['items' => $items]);
     }
 
@@ -30,8 +30,17 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        Item::create($request->all());
-        return redirect()->route('items-index');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $value = $request->input('value');
+        $sell = $request->input('sell');
+
+        if (!empty($name) && !empty($description) && !empty($sell) && !empty($value)){
+            Item::create($request->all());
+            return redirect()->route('items-index');
+        } else {
+            return view('items.errors', ['erro' => "Todos os campos devem ser preenchidos"]);
+        }
     }
 
     /**
@@ -62,25 +71,40 @@ class ItemController extends Controller
     public function update(Request $request, string $id)
     {
         $item = Item::where('id', $id)->first();
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $value = $request->input('value');
+        $sell = $request->input('sell');
         $change = false;
 
-        if ($item['name'] != $request ['name']) {
-            $change = true;
+        if (!empty($name) && !empty($description) && !empty($sell) && !empty($value)){
 
-        } elseif ($item['description'] != $request ['description']) {
-            $change = true;
+            if ($item['name'] != $request ['name']) {
+                $change = true;
 
-        } elseif ($item['category'] != $request ['category']) {
-            $change = true;
+            } elseif ($item['description'] != $request ['description']) {
+                $change = true;
+
+            } elseif ($item['sell'] != $request ['sell']) {
+                $change = true;
+
+            } elseif ($item['value'] != $request ['value']) {
+                $change = true;
+
+            } else {
+                return view('items.errors', ['erro' => "Nenhum campo alterado"]);
+            }
+
         } else {
-            return 'nenhum campo alterado';
+            return view('items.errors', ['erro' => "Todos os campos devem ser preenchidos"]);
         }
 
         if ($change == true){
             Item::where('id', $id)->first()->update([
                 'name' => $request->name,
                 'description' => $request->description,
-                'category' => $request->category
+                'value' => $request->value,
+                'sell' => $request->sell
             ]);
             return redirect()->route('items-index');
         }

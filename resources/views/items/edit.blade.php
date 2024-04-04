@@ -1,34 +1,47 @@
 @extends('layouts.app')
 @section('title')
-Detalhes
+Editar
 @endsection
 
 @if (Auth::user()->admin)
 @section('content')
 <div class="container">
     <div class="d-flex align-items-center my-4 ">
-        <a class="btn me-2 p-0" href="">
+        <button class="btn me-2 p-0" id="goBackButton">
             <i class="bi bi-arrow-left-circle-fill fs-4"></i>
-        </a>
-        <h2 class="m-0">Detalhes</h2>
+        </button>
+        <h2 class="m-0">Editar</h2>
     </div>
 
-    <form action="{{route('items-update', ['id' => $item->id])}}" method="POST">
+    <form action="{{route('items-update', ['id' => $item->id])}}" id="productForm" method="POST">
     @csrf
     @method('PUT')
         <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" value="{{$item->name}}" class="form-control" name="name">
+            <input type="text"  value="{{$item->name}}" class="form-control" name="name">
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Descrição</label>
-            <textarea rows="3" type="text" class="form-control" name="description">{{$item->description}}</textarea>
+            <textarea rows="3"  type="text" class="form-control" name="description">{{$item->description}}</textarea>
         </div>
 
         <div class="mb-3">
-            <label for="category"  class="form-label">Categoria</label>
-            <input type="text" value="{{$item->category}}" class="form-control" name="category">
+            <label for="value" class="form-label">Valor</label>
+            <input type="text"  id="value" value="{{$item->value}}" class="form-control" name="value">
+        </div>
+
+        <div class="mb-3">
+            <label for="sell" class="form-label">Disponível para venda</label>
+            <select name="sell" class="form-select">
+                @if ($item->sell == "Sim")
+                    <option value="Sim" selected>Sim</option>
+                    <option value="Não">Não</option>
+                @else
+                    <option value="Sim">Sim</option>
+                    <option value="Não" selected>Não</option>
+                @endif
+            </select>
         </div>
 
         <div class="row d-flex align-items-center">
@@ -46,6 +59,7 @@ Detalhes
     </form>
 
 </div>
+<script src="{{ asset('js/format.js') }}"></script>
 @endsection
 @else
 
