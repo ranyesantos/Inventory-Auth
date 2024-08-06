@@ -12,7 +12,7 @@ class Item extends Model
         'id',
         'name',
         'description',
-        'value',
+        'price',
         'sell'
     ];
 }
