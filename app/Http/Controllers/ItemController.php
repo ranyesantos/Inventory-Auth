@@ -3,22 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ItemRequest;
 use App\Models\Item;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * display a listing of the items ordered by price asc
+     * @var $items reiceves all the data from the database
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $items = Item::orderBy('value', 'asc')->get();;
+        $items = Item::orderBy('price', 'asc')->get();
         return view('items.index', ['items' => $items]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * show the form for creating a new resource
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -26,25 +33,29 @@ class ItemController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * register a new item in the database
+     * @param \App\Http\Requests\ItemRequest $request
+     * @return mixed|RedirectResponse|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
-        $name = $request->input('name');
-        $description = $request->input('description');
-        $value = $request->input('value');
-        $sell = $request->input('sell');
 
-        if (!empty($name) && !empty($description) && !empty($sell) && !empty($value)){
+        try {
+
             Item::create($request->all());
             return redirect()->route('items-index');
-        } else {
-            return view('items.errors', ['erro' => "Todos os campos devem ser preenchidos"]);
+
+        } catch (Exception $e) {
+
+            return view('items.errors', ['errors' => $e->getMessage()]);
+
         }
     }
 
     /**
-     * Display the specified resource.
+     * show details of a specific item
+     * @param string $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(string $id)
     {
@@ -53,7 +64,9 @@ class ItemController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * show the form for editing the specified item.
+     * @param string $id
+     * @return mixed|RedirectResponse|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(string $id)
     {
@@ -66,53 +79,31 @@ class ItemController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update data of a specific item
+     * @param \App\Http\Requests\ItemRequest $request
+     * @param string $id
+     * @return mixed|RedirectResponse|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function update(Request $request, string $id)
+    public function update(ItemRequest $request, string $id)
     {
-        $item = Item::where('id', $id)->first();
-        $name = $request->input('name');
-        $description = $request->input('description');
-        $value = $request->input('value');
-        $sell = $request->input('sell');
-        $change = false;
-
-        if (!empty($name) && !empty($description) && !empty($sell) && !empty($value)){
-
-            if ($item['name'] != $request ['name']) {
-                $change = true;
-
-            } elseif ($item['description'] != $request ['description']) {
-                $change = true;
-
-            } elseif ($item['sell'] != $request ['sell']) {
-                $change = true;
-
-            } elseif ($item['value'] != $request ['value']) {
-                $change = true;
-
-            } else {
-                return view('items.errors', ['erro' => "Nenhum campo alterado"]);
-            }
-
-        } else {
-            return view('items.errors', ['erro' => "Todos os campos devem ser preenchidos"]);
-        }
-
-        if ($change == true){
+        try {
             Item::where('id', $id)->first()->update([
                 'name' => $request->name,
                 'description' => $request->description,
-                'value' => $request->value,
+                'price' => $request->price,
                 'sell' => $request->sell
             ]);
             return redirect()->route('items-index');
-        }
 
+        } catch (Exception $e) {
+            return view('items.errors', ['errors' => $e->getMessage()]);
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * delete a specific item
+     * @param string $id
+     * @return mixed|RedirectResponse
      */
     public function destroy(string $id)
     {

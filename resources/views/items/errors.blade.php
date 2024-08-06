@@ -5,7 +5,11 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <div class="d-flex flex-column align-items-center">
-                <h2 class="text-center mb-3">{{ $erro }}</h2>
+                @foreach($errors->all() as $error)
+                    <ul>
+                        <li>{{ htmlspecialchars($error) }}</li>
+                    </ul>
+                @endforeach
                 <button class="btn btn-primary mt-3" id="goBackButton" >Retornar</button>
             </div>
         </div>

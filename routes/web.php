@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ItemController::class, 'index'])->name('items-index');
 
-Route::prefix('items')->group(function(){
+Route::prefix('/items')->group(function(){
 
     Route::get('/create', [ItemController::class, 'create'])->name('items-create')->middleware('auth');
 
     Route::post('/', [ItemController::class, 'store'])->name('items-store')->middleware('auth');
 
-    Route::get('/show/{id}', [ItemController::class, 'show'])->name('items-show')->middleware('auth');
+    Route::get('/{id}', [ItemController::class, 'show'])->name('items-show')->middleware('auth');
 
     Route::get('{id}/edit', [ItemController::class, 'edit'])->name('items-edit')->middleware('admin');
 
