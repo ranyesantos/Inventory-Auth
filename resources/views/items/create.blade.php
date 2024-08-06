@@ -28,8 +28,8 @@ Adicionar Produto
         </div>
 
         <div class="mb-3">
-            <label for="value" class="form-label">Valor</label>
-            <input type="text" id="value" class="form-control" name="value">
+            <label for="price" class="form-label">Valor</label>
+            <input type="text" id="value" class="form-control" name="price">
         </div>
 
         <div class="mb-3">

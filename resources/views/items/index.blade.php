@@ -53,7 +53,7 @@ Página Inicial
             @foreach ($items as $item)
                 <tr>
                     <td><div class="mt-1">{{$item->name}}</div></td>
-                    <td><div class="mt-1 text-center">R$ {{ number_format($item->value, 2, ',', '.') }}</div></td>
+                    <td><div class="mt-1 text-center">R$ {{ number_format($item->price, 2, ',', '.') }}</div></td>
 
                     <td class="mb-1 p-0 col-1 px-2">
                         <div class="row">

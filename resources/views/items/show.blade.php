@@ -24,7 +24,7 @@ Detalhes
 
         <div class="mb-3">
             <label for="value"  class="form-label">Valor</label>
-            <input type="text" value="R$ {{ number_format($item->value, 2, ',', '.') }}" disabled readonly class="form-control" name="value">
+            <input type="text" value="R$ {{ number_format($item->price, 2, ',', '.') }}" disabled readonly class="form-control" name="value">
         </div>
 
         <div class="mb-3">
