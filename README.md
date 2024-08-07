@@ -3,7 +3,7 @@
 
 **Nome**: CRUD-Auth
 
-**Descrição**: Esta aplicação foi desenvolvida para servir de controle de inventário  de uma    empresa. A aplicação permite a administração dos itens em estoque, facilitando a entrada, saída e movimentação de produtos. A solução serve para diferentes tipos de cargos dentro da empresa, já que o sistema de permissões garante o acesso as funcionalidades com base nas permissões de cada usuário.
+**Descrição**: Esta aplicação foi desenvolvida pensando em empresas que buscam um sistema de inventário que permita uma gestão personalizada dos itens de acordo com o nível de permissão concedido ao usuário. 
 
 ## Pré-requisitos
 
@@ -115,4 +115,4 @@
    - Adicione e edite informações sobre produtos, incluindo nome, descrição, preço e disponibilidade para venda.
     
 2. **Segurança e Controle**
-   - **Autenticação e Autorização**: Sistema de login seguro com autenticação e controle de acesso baseado em funções.
+   - **Autenticação e Autorização**: Sistema de login seguro com autenticação e controle de acesso baseado em middlewares.
