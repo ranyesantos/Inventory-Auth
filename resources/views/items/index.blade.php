@@ -18,8 +18,12 @@ Página Inicial
                         </button>
                         <ul class="dropdown-menu">
                             <div class="d-flex align-items-center px-3">
-                                <i class="bi bi-box-arrow-left"></i>
-                                <li><a class="dropdown-item px-1" href="{{Route('users-destroy')}}">Logout</a></li>
+                                </li>
+                                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a class="dropdown-item px-1" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                </li>
                             </div>
                         </ul>
                     </div>
