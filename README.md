@@ -1,7 +1,7 @@
 
 ## Visão Geral
 
-**Nome**: CRUD-Auth
+**Nome**: Inventory-Auth
 
 **Descrição**: Esta aplicação foi desenvolvida pensando em empresas que buscam um sistema de inventário que permita uma gestão personalizada dos itens de acordo com o nível de permissão concedido ao usuário. 
 
