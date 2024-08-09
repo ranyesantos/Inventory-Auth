@@ -111,8 +111,22 @@
 ## Funcionalidades Principais
 
 1. **Gerenciamento de Inventário**
-   
    - Adicione e edite informações sobre produtos, incluindo nome, descrição, preço e disponibilidade para venda.
     
 2. **Segurança e Controle**
-   - **Autenticação e Autorização**: Sistema de login seguro com autenticação e controle de acesso baseado em middlewares.
+   - Autenticação e Autorização: Sistema de login seguro com autenticação e controle de acesso baseado em middlewares.
+
+
+## Funcionalidades em Desenvolvimento
+
+1. **Monitoramento de Alteração dos Itens**
+    - Ao exibir detalhes de um item, será possível visualizar o histórico de alterações e o usuário que as realizou. 
+
+
+2. **Atribuição de Tarefas**
+    - Administradores poderão atribuir tarefas para outros usuários. Os usuários serão notificados sobre as tarefas atribuídas a eles.
+
+3. **Permissões Específicas para Usuários Comuns**
+   - Além das permissões padrão de um usuário, esta funcionalidade permitirá que um administrador conceda uma ou mais permissões específicas de administradores para usuários comuns. Como por exemplo, adicionar novos usuários ou excluir usuários. Caso um usuário tenha todas as permissões de administrador, o sistema irá atribuir para ele a permissão de administrador.
+
+4. **Melhorias no Front-end**
