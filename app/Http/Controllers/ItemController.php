@@ -14,7 +14,6 @@ class ItemController extends Controller
 
     /**
      * display a listing of the items ordered by price asc
-     * @var $items reiceves all the data from the database
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
@@ -35,21 +34,12 @@ class ItemController extends Controller
     /**
      * register a new item in the database
      * @param \App\Http\Requests\ItemRequest $request
-     * @return mixed|RedirectResponse|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return RedirectResponse
      */
     public function store(ItemRequest $request)
     {
-
-        try {
-
-            Item::create($request->all());
-            return redirect()->route('items-index');
-
-        } catch (Exception $e) {
-
-            return view('items.errors', ['errors' => $e->getMessage()]);
-
-        }
+        Item::create($request->validated);
+        return redirect()->route('items-index');
     }
 
     /**
@@ -66,44 +56,31 @@ class ItemController extends Controller
     /**
      * show the form for editing the specified item.
      * @param string $id
-     * @return mixed|RedirectResponse|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(string $id)
     {
-        $item = Item::where('id', $id)->first();
-        if (!empty($item)){
-            return view('items.edit', ['item' => $item]);
-        } else {
-            return redirect()->route('items-index');
-        }
+        $item = Item::findOrFail($id);
+
+        return view('items.edit', ['item' => $item]);
     }
 
     /**
      * update data of a specific item
      * @param \App\Http\Requests\ItemRequest $request
      * @param string $id
-     * @return mixed|RedirectResponse|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return RedirectResponse
      */
     public function update(ItemRequest $request, string $id)
     {
-        try {
-            Item::where('id', $id)->first()->update([
-                'name' => $request->name,
-                'description' => $request->description,
-                'price' => $request->price,
-                'sell' => $request->sell
-            ]);
-            return redirect()->route('items-index');
-
-        } catch (Exception $e) {
-            return view('items.errors', ['errors' => $e->getMessage()]);
-        }
+        Item::where('id', $id)->first()->update($request->validated());
+        return redirect()->route('items-index');
     }
 
     /**
      * delete a specific item
      * @param string $id
-     * @return mixed|RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(string $id)
     {

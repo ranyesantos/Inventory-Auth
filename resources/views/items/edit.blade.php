@@ -7,9 +7,9 @@ Editar
 @section('content')
 <div class="container">
     <div class="d-flex align-items-center my-4 ">
-        <button class="btn me-2 p-0" id="goBackButton">
+        <a class="btn me-2 p-0" href="{{route('items-show', ['id' => $item->id])}}">
             <i class="bi bi-arrow-left-circle-fill fs-4"></i>
-        </button>
+        </a>
         <h2 class="m-0">Editar</h2>
     </div>
 
@@ -57,6 +57,13 @@ Editar
         </div>
 
     </form>
+    @if ($errors->any())
+        <span class="error-messages">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </span>
+    @endif
 
 </div>
 <script src="{{ asset('js/format.js') }}"></script>

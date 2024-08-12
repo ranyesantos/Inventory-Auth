@@ -16,13 +16,6 @@ class ItemRequest extends FormRequest
         return true;
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->view('items.errors',[
-            'errors' => $validator->errors()
-        ]));
-    }
-
     /**
      * Summary of rules
      * @return array
