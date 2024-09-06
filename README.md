@@ -25,7 +25,7 @@
 
     Após clonar, para selecionar o diretório do projeto, execute:
     ```sh
-    cd CRUD-Auth
+    cd Inventory-Auth
     ```
 
 2. **Instalar Dependências do PHP**
